@@ -20,6 +20,18 @@ pipeline {
            }
         }
       }
+      stage ('Checkout') {
+
+        steps {
+          script {
+            git credentialsId: 'github'
+            url: https://github.com/Rutakara/ArgoJenkinsCD
+            branch: 'main'
+          }
+
+        }
+      }
+
   }
   
 }
