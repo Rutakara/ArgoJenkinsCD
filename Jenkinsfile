@@ -24,11 +24,18 @@ pipeline {
 
         steps {
           script {
-            git credentialsId: 'github'
-            url: https://github.com/Rutakara/ArgoJenkinsCD
+            git credentialsId: 'github',
+            url: 'https://github.com/Rutakara/ArgoJenkinsCD.git',
             branch: 'main'
           }
 
+        }
+      }
+      stage ('Build') {
+        step {
+          script {
+            docker_image = docker.Build "${IMAGE_NAME}"
+          }
         }
       }
 
