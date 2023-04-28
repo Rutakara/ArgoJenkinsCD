@@ -38,6 +38,25 @@ pipeline {
           }
         }
       }
+      stage ('Push') {
+        steps {
+          script {
+            docker.withRegistry('',REGISTRY_CRED) {
+              docker_image.push("${IMAGE_TAG}")
+              docker_image.push('latest')
+            }
+          }
+        }
+      }
+      stage ('Delete image') {
+        steps {
+          script {
+            sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+            sh "docker rmi ${IMAGE_NAME}:latest"
+          }
+        }
+      }
+
       
 
   }
