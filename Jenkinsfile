@@ -32,9 +32,9 @@ pipeline {
         }
       }
       stage ('Build') {
-        step {
+        steps {
           script {
-            docker_image = docker.Build "${IMAGE_NAME}"
+            docker_image = docker.build "${IMAGE_NAME}"
           }
         }
       }
